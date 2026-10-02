@@ -1,9 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="jar" name="BLCdialogEditor:jar">
-    <output-path>$PROJECT_DIR$/out/artifacts/BLCdialogEditor_jar</output-path>
-    <root id="archive" name="BLCdialogEditor.jar">
-      <element id="module-output" name="BLCdialogEditor" />
-      <element id="extracted-dir" path="$PROJECT_DIR$/libs/gson-2.14.0.jar" path-in-jar="/" />
-    </root>
-  </artifact>
-</component>
