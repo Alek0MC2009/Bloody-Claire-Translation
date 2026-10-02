@@ -2,7 +2,7 @@
 THIRD-PARTY LICENSES
 ================================================================================
 
-Dreams? String Tool uses the following third-party libraries. Each library
+Bloody Claire Dialogue Editor uses the following third-party libraries. Each library
 is distributed under its own license, reproduced or referenced below.
 
 The full text of the Apache License, Version 2.0 is reproduced at the end of
@@ -14,7 +14,7 @@ this file, since Gson is distributed under that license.
 --------------------------------------------------------------------------------
 
 Name:        Gson
-Version:     2.11.0
+Version:     2.14.0
 Author:      Google Inc.
 Homepage:    https://github.com/google/gson
 License:     Apache License, Version 2.0
@@ -39,7 +39,7 @@ limitations under the License.
 --------------------------------------------------------------------------------
 
 Name:        Java SE / OpenJDK
-Version:     17 or newer
+Version:     26 or newer
 Author:      Oracle and/or its affiliates, and the OpenJDK community
 Homepage:    https://openjdk.org/
 License:     GPL v2 with Classpath Exception
@@ -53,9 +53,9 @@ install a compatible JDK/JRE on their machine.
 FULL TEXT OF THE APACHE LICENSE, VERSION 2.0
 ================================================================================
 
-                                Apache License
-                           Version 2.0, January 2004
-                        http://www.apache.org/licenses/
+                           Apache License
+                        Version 2.0, January 2004
+                     http://www.apache.org/licenses/
 
    TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION
 
