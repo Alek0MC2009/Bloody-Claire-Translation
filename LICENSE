@@ -1,4 +1,20 @@
-                                 Apache License
+Apache License, Version 2.0 with Commons Clause
+
+Copyright 2026 Alejandro Bravo Lingyte
+
+The Software is provided under the terms of the Apache License, Version 2.0,
+with the following exception (the "Commons Clause"):
+
+  "The grant of rights under the Apache License, Version 2.0 does not
+   include the right to Sell the Software. 'Sell' means to practice any
+   or all of the rights granted to You under the Apache License,
+   Version 2.0 to provide a product or service to third parties for a
+   fee or other consideration, where the value of such product or
+   service derives substantially from the Software."
+
+The full text of the Apache License, Version 2.0 follows below.
+
+                                Apache License
                            Version 2.0, January 2004
                         http://www.apache.org/licenses/
 
@@ -199,3 +215,14 @@
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
    See the License for the specific language governing permissions and
    limitations under the License.
+
+===============================================================================
+
+NOTICE
+
+This Software is licensed under the Apache License, Version 2.0, subject
+to the Commons Clause restriction set forth at the beginning of this
+document. In the event of any conflict between the Commons Clause and
+the Apache License, Version 2.0, the Commons Clause shall control.
+
+===============================================================================
