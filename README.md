@@ -274,12 +274,12 @@ You are free to use, modify, fork, and redistribute this editor for any
 purpose, including commercial projects. The only restriction is that
 you may not sell the editor itself.
 
-See [LICENSE](https://www.google.com/search?q=LICENSE) for details.
+See [LICENSE](THIRD_PARTY_LICENSES.txt).
 
 ### Third-party libraries
 
 * [Gson](https://github.com/google/gson) — Apache License 2.0.
-  See [THIRD_PARTY_LICENSES.txt](https://www.google.com/search?q=THIRD_PARTY_LICENSES.txt).
+  See [THIRD_PARTY_LICENSES.txt](THIRD_PARTY_LICENSES.txt).
 
 ---
 
