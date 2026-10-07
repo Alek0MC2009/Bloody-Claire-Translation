@@ -29,6 +29,7 @@ public class TagToolbar extends JToolBar {
         addTag("/NL", "/NL", "Nombre de Lara");
         addTag("/NA", "/NA", "Nombre de Ale");
         addTag("/NX", "/NX", "Nombre de Ximena");
+        addTag("/MN", "/MN", "Mostrar dinero");
         addSeparator();
 
         addTag("/wave", "/wave", "Efecto wave");
