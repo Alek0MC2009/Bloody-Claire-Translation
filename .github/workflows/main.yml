@@ -4,7 +4,7 @@ on:
   push:
     branches: [ "master" ]
     tags:
-      - 'v*' # Se activa automáticamente cuando subes un tag como v1.0.0, v2.1.0, etc.
+      - 'v*'
   pull_request:
     branches: [ "master" ]
 
@@ -12,7 +12,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     permissions:
-      contents: write # Permiso obligatorio para que GitHub Actions pueda crear la Release
+      contents: write
 
     steps:
       - name: Checkout repository
@@ -34,10 +34,13 @@ jobs:
         run: |
           jar cfe app.jar Main -C out/production .
 
-      # Este paso crea la Release y sube el JAR SOLO cuando subes un Tag (etiqueta de versión)
+      # (Opcional pero recomendado) Comprueba que el JAR existe antes de subirlo
+      - name: Verify JAR exists
+        run: ls -la app.jar
+
       - name: Create GitHub Release
         if: startsWith(github.ref, 'refs/tags/')
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v3
         with:
           files: app.jar
           name: Release ${{ github.ref_name }}
