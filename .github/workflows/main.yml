@@ -30,12 +30,18 @@ jobs:
           find src -name "*.java" > sources.txt
           javac -d out/production -cp "libs/*:src" @sources.txt
 
-      - name: Package Executable JAR
+      - name: Package Executable JAR (Fat JAR)
         run: |
+          # 1. Extraer los archivos .class de Gson directamente en out/production
+          unzip -q libs/gson-2.14.0.jar -d out/production
+          
+          # 2. Eliminar la firma de la librería si la tuviera (evita SecurityException)
+          rm -rf out/production/META-INF/*.SF out/production/META-INF/*.DSA out/production/META-INF/*.RSA
+          
+          # 3. Crear el JAR empaquetando todo junto (Clases propias + Gson)
           jar cfe app.jar Main -C out/production .
 
-      # (Opcional pero recomendado) Comprueba que el JAR existe antes de subirlo
-      - name: Verify JAR exists
+      - name: Verify JAR generated
         run: ls -la app.jar
 
       - name: Create GitHub Release
