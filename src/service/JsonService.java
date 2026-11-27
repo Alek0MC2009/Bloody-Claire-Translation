@@ -78,8 +78,17 @@ public class JsonService {
         Path ruta = idioma.getRuta();
         if (ruta.getParent() != null) Files.createDirectories(ruta.getParent());
 
+        // 1. Generamos el JSON en un String con Gson
+        String jsonBruto = gson.toJson(salida);
+
+        // 2. Reemplazamos los "\\n" o escapes que Gson fuerza por saltos de línea reales 
+        // o por el formato exacto que necesites para tu motor.
+        // Si Gson pone "\\n", lo convertimos a un salto de línea físico en el archivo:
+        String jsonLimpio = jsonBruto.replace("\\\\n", "\n");
+
+        // 3. Escribimos el string limpio directamente al archivo
         try (BufferedWriter w = Files.newBufferedWriter(ruta, StandardCharsets.UTF_8)) {
-            gson.toJson(salida, w);
+            w.write(jsonLimpio);
         }
     }
 
