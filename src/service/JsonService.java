@@ -65,33 +65,28 @@ public class JsonService {
         }
     }
 
-    /** Guarda un idioma en su archivo. */
-    /** Guarda un idioma en su archivo. Crea la carpeta y el archivo si no existen. */
     public void guardar(Proyecto proyecto, Idioma idioma) throws IOException {
         Map<String, String> salida = new LinkedHashMap<>();
         salida.put("lang", idioma.getCodigo());
 
         for (StringEntry entry : proyecto.getStrings().values()) {
-            salida.put(entry.getId(), entry.getTraduccion(idioma.getCodigo()));
+            String texto = entry.getTraduccion(idioma.getCodigo());
+            
+            if (texto != null) {
+                // Reemplazamos los dos caracteres literal "\n" por un salto de línea real de Java
+                texto = texto.replace("\\n", "\n");
+            }
+            
+            salida.put(entry.getId(), texto);
         }
 
         Path ruta = idioma.getRuta();
         if (ruta.getParent() != null) Files.createDirectories(ruta.getParent());
 
-        // 1. Generamos el JSON en un String con Gson
-        String jsonBruto = gson.toJson(salida);
-
-        // 2. Reemplazamos los "\\n" o escapes que Gson fuerza por saltos de línea reales 
-        // o por el formato exacto que necesites para tu motor.
-        // Si Gson pone "\\n", lo convertimos a un salto de línea físico en el archivo:
-        String jsonLimpio = jsonBruto.replace("\\\\n", "\n");
-
-        // 3. Escribimos el string limpio directamente al archivo
         try (BufferedWriter w = Files.newBufferedWriter(ruta, StandardCharsets.UTF_8)) {
-            w.write(jsonLimpio);
+            gson.toJson(salida, w);
         }
     }
-
     /** Guarda todos los idiomas cargados. */
     public void guardarTodo(Proyecto proyecto) throws IOException {
         for (Idioma idioma : proyecto.getIdiomas().values()) {
