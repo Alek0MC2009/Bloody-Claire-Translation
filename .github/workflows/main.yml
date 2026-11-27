@@ -3,8 +3,6 @@ name: Compilar y Publicar App Swing Java 26
 on:
   push:
     branches: [ "master" ]
-    tags:
-      - 'v*' # Se activa automáticamente cuando subes un tag como v1.0.0, v2.1.0, etc.
   pull_request:
     branches: [ "master" ]
 
@@ -12,11 +10,13 @@ jobs:
   build:
     runs-on: ubuntu-latest
     permissions:
-      contents: write # Permiso obligatorio para que GitHub Actions pueda crear la Release
+      contents: write # Permiso obligatorio para que GitHub Actions pueda crear el Tag y la Release
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Obligatorio para que Git seiente el historial y permita crear tags
 
       - name: Set up JDK 26
         uses: actions/setup-java@v6
@@ -34,12 +34,32 @@ jobs:
         run: |
           jar cfe app.jar Main -C out/production .
 
-      # Este paso crea la Release y sube el JAR SOLO cuando subes un Tag (etiqueta de versión)
+      # --- PASO NUEVO: Crear y subir el Tag automáticamente ---
+      - name: Generar y empujar Tag automático
+        if: github.ref == 'refs/heads/master'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          
+          # Generamos un nombre de tag basado en la fecha y hora UTC (ej: v1.0.1711234567)
+          TAG_NAME="v1.0.$(date +%s)"
+          
+          echo "Creando tag $TAG_NAME..."
+          git tag $TAG_NAME
+          git push origin $TAG_NAME
+          
+          # Guardamos el nombre del tag para usarlo en el siguiente paso de la Release
+          echo "TAG_NAME=$TAG_NAME" >> $GITHUB_ENV
+
+      # --- PASO DE RELEASE ---
       - name: Create GitHub Release
-        if: startsWith(github.ref, 'refs/tags/')
+        if: github.ref == 'refs/heads/master' || startsWith(github.ref, 'refs/tags/')
         uses: softprops/action-gh-release@v2
         with:
           files: app.jar
-          name: Release ${{ github.ref_name }}
+          tag_name: ${{ env.TAG_NAME || github.ref_name }}
+          name: Release ${{ env.TAG_NAME || github.ref_name }}
           draft: false
           prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
